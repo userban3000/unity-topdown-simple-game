@@ -225,10 +225,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e5777cbe682f5429fcdaa31a4a9598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 180
-  damage: 40
+  startingHealth: 400
+  damage: 45
   damageVariance: 5
-  speed: 3
+  speed: 5
   skinColor: {r: 1, g: 0, b: 0.7129016, a: 0}
   deathEffect: {fileID: 1197282316583447398, guid: af4ffc0e03baaa348b38988ea189dd10, type: 3}
   hitEffect: {fileID: 1197282316583447398, guid: 0f3b332f23a50b6498abde7810f6fcc1, type: 3}

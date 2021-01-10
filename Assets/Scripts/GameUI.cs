@@ -23,6 +23,9 @@ public class GameUI : MonoBehaviour {
 
     public Text timerText;
 
+    public GameObject pauseUI;
+    bool gameIsPaused = false;
+
     float timeSinceStart;
 
     LivingEntity player;
@@ -31,6 +34,7 @@ public class GameUI : MonoBehaviour {
     Gun gun;
 
     bool pauseTimer;
+    int isSpeedrunning;
     
     Color originalCoverColor;
 
@@ -45,15 +49,22 @@ public class GameUI : MonoBehaviour {
         gunController = FindObjectOfType<GunController>();
         gunController.OnGunChange += UpdateGun;
 
-        
+        isSpeedrunning = PlayerPrefs.GetInt("isSpeedrunning", 0);
         healthHUD.text = player.GetHealth().ToString();
         originalCoverColor = nwCover.color;
-        StartTimer();
+        if ( isSpeedrunning == 1)
+            StartTimer();
     }
 
     private void Update() {
         if ( !pauseTimer )
             UpdateTimer();
+        if ( Input.GetKeyDown(KeyCode.Escape) ) {
+            if ( !gameIsPaused )
+                Pause();
+            else
+                Unpause();
+        }
     }
 
     public void UpdateHealth () {
@@ -62,6 +73,22 @@ public class GameUI : MonoBehaviour {
     
     public void UpdateAmmo () {
         StartCoroutine(AmmoAnimate(0.2f));
+    }
+
+    public void Pause() {
+        Time.timeScale = 0;
+        fadePlane.color = new Color(0, 0, 0, 0.5f);
+        pauseUI.SetActive(true);
+        Cursor.visible = true;
+        crosshair.SetActive(false);
+    }
+
+    public void Unpause() {
+        Time.timeScale = 1;
+        fadePlane.color = new Color(0, 0, 0, 0f);
+        pauseUI.SetActive(false);
+        Cursor.visible = false;
+        crosshair.SetActive(true);
     }
 
     public void UpdateGun() {
@@ -203,6 +230,12 @@ public class GameUI : MonoBehaviour {
         ammoHUD.color = Color.clear;
         ammoTotal.color = Color.clear;
         crosshair.SetActive(false);
+
+        int levelReached = PlayerPrefs.GetInt("reachedLevel", 1);
+        int thisLevel = SceneManager.GetActiveScene().name[5] - '0'; //yes i get the level number from the name sue me
+        if ( thisLevel > levelReached )
+            PlayerPrefs.SetInt("reachedLevel", thisLevel + 1);
+
         pauseTimer = true;
     }
 
@@ -217,13 +250,21 @@ public class GameUI : MonoBehaviour {
         }
     }
 
-    public void StartNewGame() {
-        SceneManager.LoadScene("Game");
+    public void GoToMenu() {
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void TryAgain() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void NextLevel() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void StartTimer() {
         timeSinceStart = 0f;
-        pauseTimer = true;
+        pauseTimer = false;
     }
 
     public void UpdateTimer() {

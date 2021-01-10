@@ -132,11 +132,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e5777cbe682f5429fcdaa31a4a9598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 30
-  damage: 15
+  startingHealth: 15
+  damage: 20
   damageVariance: 5
-  speed: 3
-  skinColor: {r: 0.43698245, g: 0.4716981, b: 0.31372374, a: 0}
+  speed: 2
+  skinColor: {r: 0.52674437, g: 0.8396226, b: 0.6630177, a: 1}
   deathEffect: {fileID: 1197282316583447398, guid: af4ffc0e03baaa348b38988ea189dd10, type: 3}
   hitEffect: {fileID: 1197282316583447398, guid: 0f3b332f23a50b6498abde7810f6fcc1, type: 3}
   dmgPopup: {fileID: -5300050586570454105, guid: f6e3f64176ffe774aa2981104a6a4654, type: 3}

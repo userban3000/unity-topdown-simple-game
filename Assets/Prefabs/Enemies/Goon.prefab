@@ -133,9 +133,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 30
-  damage: 10
-  damageVariance: 2
-  speed: 4
+  damage: 25
+  damageVariance: 5
+  speed: 3
   skinColor: {r: 0.1254902, g: 0.8705883, b: 0.34117648, a: 1}
   deathEffect: {fileID: 1197282316583447398, guid: af4ffc0e03baaa348b38988ea189dd10, type: 3}
   hitEffect: {fileID: 1197282316583447398, guid: 0f3b332f23a50b6498abde7810f6fcc1, type: 3}
